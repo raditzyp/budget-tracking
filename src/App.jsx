@@ -1,15 +1,10 @@
-// import { useState } from 'react'
-// import reactLogo from './assets/react.svg'
-// import viteLogo from '/vite.svg'
-import './App.css'
+// eslint-disable-next-line no-unused-vars
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App.jsx";
 
-function App() {
-
-  return (
+ReactDOM.createRoot(document.getElementById("root")).render(
     <>
-      <button className="btn btn-primary">Hello World!</button>
+        <App />
     </>
-  )
-}
-
-export default App
+);
