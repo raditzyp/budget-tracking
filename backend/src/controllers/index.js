@@ -43,3 +43,55 @@ export const getAllTransaction = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 };
+
+export const updateTransaction = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { title, amount, type } = req.body;
+
+        // validasi request
+        const transaction = await prisma.transaction.findUnique({ 
+            where: { id } 
+        });
+
+        if (!transaction) {
+            return res.status(404).json({ message: "Transaksi tidak ditemukan" });
+        }
+
+        // update transaction
+        await prisma.transaction.update({
+            where: { id }, data: { title, amount, type }
+        });
+
+        // response
+        res.status(200).json({ message: "Transaksi berhasil diubah" });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+export const deleteTransaction = async (req, res) => {
+    try {
+        const { id } = req.body;
+
+        const transaction = await prisma.transaction.findUnique({ 
+            where: { id } 
+        });
+
+        if (!transaction) {
+            return res.status(404).json({ 
+                message: "Transaksi tidak ditemukan" 
+            });
+        }
+
+        // proses delete
+        await prisma.transaction.delete({ 
+            where: { id } 
+        });
+
+        // response
+        res.status(200).json({ message: "Transaksi berhasil dihapus" });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
