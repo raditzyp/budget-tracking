@@ -12,3 +12,17 @@ datasource db {
   provider = "mongodb"
   url      = env("DATABASE_URL")
 }
+
+model transaction {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  title     String
+  amount    Int
+  type      TransactionType @default(INCOME)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum TransactionType {
+  INCOME
+  EXPENSE
+}
