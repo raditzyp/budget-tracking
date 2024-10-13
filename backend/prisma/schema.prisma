@@ -17,7 +17,7 @@ model transaction {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   title     String
   amount    Int
-  type      TransactionType @default(INCOME)
+  type      TransactionType
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
